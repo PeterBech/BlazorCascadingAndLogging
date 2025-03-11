@@ -1,5 +1,6 @@
 ﻿@page "/counter"
 @using BlazorCascadingAndLogging.Models
+@inject ILogger<CounterModel> Logger
 
 <PageTitle>Counter</PageTitle>
 
@@ -11,11 +12,17 @@
 <button class="btn btn-success" @onclick="IncrementCount">Click me to increase by 1</button>
 
 @code {
+    protected override void OnInitialized()
+    {
+        Logger.LogInformation("Counteren er blevet initialiseret med Serilog.");
+    }
+
     [CascadingParameter]
     private CounterModel? CounterModel { get; set; }
 
     private void IncrementCount()
     {
         CounterModel?.IncrementCount();
+        Logger.LogInformation($"Counter incremented, Current Count: {CounterModel?.Count}");
     }
 }
