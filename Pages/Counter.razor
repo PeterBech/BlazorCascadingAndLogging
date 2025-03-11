@@ -1,0 +1,21 @@
+﻿@page "/counter"
+@using BlazorCascadingAndLogging.Models
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @CounterModel?.Count</p>
+
+<p>Pick a number to use as a multiplier:</p>
+<button class="btn btn-success" @onclick="IncrementCount">Click me to increase by 1</button>
+
+@code {
+    [CascadingParameter]
+    private CounterModel? CounterModel { get; set; }
+
+    private void IncrementCount()
+    {
+        CounterModel?.IncrementCount();
+    }
+}
